@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        NEXUS — Security Intelligence
+    </title>
+
+
+    <!-- LEAFLET -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                N
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    NEXUS
+                </div>
+
+                <div class="brand-subtitle">
+                    SECURITY INTELLIGENCE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="system-status">
+
+            <span class="status-light"></span>
+
+            SYSTEM OPERATIONAL
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ========================= -->
+    <!-- DASHBOARD -->
+    <!-- ========================= -->
+
+    <main>
+
+
+        <!-- STATUS CARDS -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    SYSTEM
+                </div>
+
+                <div
+                    id="systemStatus"
+                    class="stat-number online"
+                >
+                    ONLINE
+                </div>
+
+                <div class="stat-description">
+                    Backend operational
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    TEMPERATURE
+                </div>
+
+                <div
+                    id="temperature"
+                    class="stat-number"
+                >
+                    --
+                </div>
+
+                <div
+                    id="weatherDescription"
+                    class="stat-description"
+                >
+                    Loading...
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    EARTHQUAKES
+                </div>
+
+                <div
+                    id="earthquakeCount"
+                    class="stat-number"
+                >
+                    --
+                </div>
+
+                <div class="stat-description">
+                    Last 24 hours
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    THREAT LEVEL
+                </div>
+
+                <div
+                    id="threatLevel"
+                    class="stat-number online"
+                >
+                    LOW
+                </div>
+
+                <div class="stat-description">
+                    Current assessment
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- MAP + RADAR -->
+        <!-- ========================= -->
+
+        <section class="main-grid">
+
+
+            <!-- MAP -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-label">
+                            GEOSPATIAL INTELLIGENCE
+                        </div>
+
+                        <h2>
+                            Event Map
+                        </h2>
+
+                    </div>
+
+
+                    <div class="live">
+                        ● LIVE
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="map"
+                    class="map"
+                ></div>
+
+            </div>
+
+
+
+            <!-- RADAR -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-label">
+                            ACTIVITY MONITOR
+                        </div>
+
+                        <h2>
+                            Threat Radar
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="radar"
+                    class="radar"
+                >
+
+                    <div class="radar-circle">
+
+                        <div class="radar-ring r1"></div>
+
+                        <div class="radar-ring r2"></div>
+
+                        <div class="radar-ring r3"></div>
+
+                        <div class="radar-line horizontal"></div>
+
+                        <div class="radar-line vertical"></div>
+
+                        <div class="radar-sweep"></div>
+
+                        <div class="radar-center"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- WEATHER -->
+        <!-- ========================= -->
+
+        <section class="panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <div class="panel-label">
+                        ENVIRONMENTAL INTELLIGENCE
+                    </div>
+
+                    <h2>
+                        Brasília
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="weatherTime"
+                    class="panel-time"
+                >
+                    --
+                </div>
+
+            </div>
+
+
+
+            <div class="weather-grid">
+
+
+                <div class="weather-item">
+
+                    <span>
+                        Temperature
+                    </span>
+
+                    <strong
+                        id="weatherTemp"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+
+
+                <div class="weather-item">
+
+                    <span>
+                        Feels Like
+                    </span>
+
+                    <strong
+                        id="weatherFeels"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+
+
+                <div class="weather-item">
+
+                    <span>
+                        Humidity
+                    </span>
+
+                    <strong
+                        id="weatherHumidity"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+
+
+                <div class="weather-item">
+
+                    <span>
+                        Wind
+                    </span>
+
+                    <strong
+                        id="weatherWind"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- EVENTS -->
+        <!-- ========================= -->
+
+        <section class="panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <div class="panel-label">
+                        REAL-TIME EVENT STREAM
+                    </div>
+
+                    <h2>
+                        Live Events
+                    </h2>
+
+                </div>
+
+
+                <div class="live">
+                    ● MONITORING
+                </div>
+
+            </div>
+
+
+            <div
+                id="events"
+                class="events"
+            >
+
+                <div class="loading">
+                    Connecting to intelligence feed...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            NEXUS SECURITY INTELLIGENCE
+        </span>
+
+        <span>
+            Real-time data monitoring
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- LEAFLET -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- API -->
+
+<script src="api.js"></script>
+
+
+<!-- RADAR -->
+
+<script src="radar.js"></script>
+
+
+<!-- MAIN -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
